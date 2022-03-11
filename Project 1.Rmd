@@ -1,0 +1,47 @@
+---
+title: "Project 1"
+author: "Thuan Tran"
+date: "`r Sys.Date()`"
+output:
+  html_document
+---
+
+
+```{r cars}
+library(ggplot2)
+library(dplyr)
+
+myddt=function(df, SPECIES){
+
+  #subset df by species
+  df1 <- df %>% filter(SPECIES == {{SPECIES}})
+
+  #create ggplot for subsetted weight vs length, with river as the color and quadratic curve added
+  g <- ggplot(df1, aes(x=WEIGHT,y=LENGTH)) +
+    geom_point(aes(color = RIVER )) +
+    geom_smooth(formula = y~x +I(x^2), method = "lm") +
+    ggtitle("Thuan Tran")
+
+  #print plot
+  print(g)
+
+  #create file name
+  fileName = paste("LvsWfor",SPECIES,".csv")
+
+  #write the dataframe used for the plot as a csv file
+  write.csv(x=df1, file=fileName)
+
+
+  #create list of unsubsetted df, subsetted df, and frequency table of df for rivers
+  mylist = list()
+  mylist[[1]] = df
+  mylist[[2]] = df1
+  mylist[[3]] = prop.table(table(df$RIVER))
+  
+  mylist
+}
+
+ddt = read.csv("DDT.csv")
+myddt(df = ddt, SPECIES  = "CCATFISH") 
+myddt(df = ddt, SPECIES = "SMBUFFALO")
+```
