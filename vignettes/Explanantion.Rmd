@@ -1,0 +1,93 @@
+---
+title: "What the package does"
+output: rmarkdown::html_vignette
+author: "Thuan Tran"
+date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{What the package does}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(myPackage)
+library(ggplot2)
+library(dplyr)
+```
+
+# Piecewise Function
+```{r}
+#' Creates a piecewise function that is centered around xk
+#'
+#' @param x vector of x-values
+#' @param coef array of 3 coefficients for the function {B0, B1, z}
+#' @param xk x value where the the line segments meet
+#'
+#' @return y value for the function y = B0 + B1x + z(x-xk)(x>xk)
+#'
+#' @examples
+#' piecewise(2, c(1.23, .234, -.24), 18)
+#' piecewise(3, c(1, 2, 3), 10)
+
+piecewise(2, c(1.23, .234, -.24), 18)
+```
+
+# mynbin
+```{r}
+#' Creates a negative binomial probability distribution for variable y
+#'
+#' @param y number of trials until the rth success is observe
+#' @param r number of successes
+#' @param p probability of success on a single Bernoulli trial
+#'
+#' @return probability of y in the negative binomial distribution
+#'
+#' @examples
+#' mynbin(10,3,0.4)
+#' mynbin(21, 2, .1)
+
+mynbin(10,3,0.4)
+```
+
+# myncurve
+```{r}
+#' Creates a normal distribution curve with x <= alpha
+#'
+#' @param mu mean
+#' @param sigma standard deviation
+#' @param alpha point where probability is calculated, x <= alpha
+#'
+#' @return shaded normal distribution curve with the probability
+#'
+#' @examples
+#' myncurve(0,1,2)
+#' myncurve(5,.5,4)
+
+myncurve(0,1,2)
+```
+
+# CLT
+```{r}
+#' Creates a distribution of the sum of samples of a uniform distribution
+#'
+#' @param n size of each uniform distribution
+#' @param iter amount of iterations done for each sampling
+#' @param a lower bound for the uniform distribution
+#' @param b upper bound for the uniform distribution
+#'
+#' @return distribution of the sum of uniforms
+#'
+#' @examples
+#' myclt(n=10,iter=10000)
+#' myclt(n=2,iter=8000)
+
+myclt(n=10,iter=10000)
+```
+
